@@ -4,7 +4,7 @@ from typing import List
 from fastapi import FastAPI, HTTPException
 from models import User_Pydantic, UserIn_Pydantic, Users
 from pydantic import BaseModel
-
+from starlette.responses import RedirectResponse
 from tortoise.contrib.fastapi import HTTPNotFoundError, register_tortoise
 
 app = FastAPI(title="Tortoise ORM FastAPI example")
@@ -13,6 +13,10 @@ app = FastAPI(title="Tortoise ORM FastAPI example")
 class Status(BaseModel):
     message: str
 
+
+@app.get("/")
+async def root():
+    return RedirectResponse(url="/docs")
 
 @app.get("/users", response_model=List[User_Pydantic])
 async def get_users():

@@ -1,1 +1,3 @@
--r requirements/prd.txt
+fastapi[all]
+aiosqlite
+tortoise-orm[accel]
